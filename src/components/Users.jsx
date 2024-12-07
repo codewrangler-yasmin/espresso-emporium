@@ -5,7 +5,9 @@ import Swal from "sweetalert2";
 
 export async function loader() {
   try {
-    const res = await fetch("http://localhost:5000/users");
+    const res = await fetch(
+      "https://coffee-store-server-blush-zeta.vercel.app/users"
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch Users");
     }
@@ -65,9 +67,13 @@ const Users = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://coffee-store-server-blush-zeta.vercel.app/users/${_id}`,
+          {
+            method: "DELETE",
+            credentials: "include",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

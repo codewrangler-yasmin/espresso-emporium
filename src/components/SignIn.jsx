@@ -28,12 +28,13 @@ const SignIn = () => {
 
         const loginInfo = { email, lastSignInTime };
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://coffee-store-server-blush-zeta.vercel.app/users", {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify(loginInfo),
+          credentials: "include",
         })
           .then((res) => res.json())
           .then((data) => {

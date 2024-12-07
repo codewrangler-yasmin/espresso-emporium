@@ -5,7 +5,9 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 
 export async function loader({ params }) {
   try {
-    const res = await fetch(`http://localhost:5000/coffee/${params.id}`);
+    const res = await fetch(
+      `https://coffee-store-server-blush-zeta.vercel.app/coffee/${params.id}`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch Coffees");
     }
@@ -49,13 +51,17 @@ const UpdateCoffee = () => {
       price,
     };
 
-    fetch(`http://localhost:5000/coffee/${loadedCoffee._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedCoffee),
-    })
+    fetch(
+      `https://coffee-store-server-blush-zeta.vercel.app/coffee/${loadedCoffee._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedCoffee),
+        credentials: "include",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

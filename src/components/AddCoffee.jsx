@@ -34,12 +34,13 @@ const AddCoffee = () => {
       price,
     };
 
-    fetch("http://localhost:5000/coffee", {
+    fetch("https://coffee-store-server-blush-zeta.vercel.app/coffee", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(newCoffee),
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {

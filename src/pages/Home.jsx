@@ -10,7 +10,9 @@ import { AuthContext } from "../providers/AuthProvider";
 
 export async function loader() {
   try {
-    const res = await fetch("http://localhost:5000/coffee");
+    const res = await fetch(
+      "https://coffee-store-server-blush-zeta.vercel.app/coffee"
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch Coffees");
     }
@@ -39,9 +41,14 @@ const Home = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/coffee/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://coffee-store-server-blush-zeta.vercel.app/coffee/${_id}`,
+          {
+            method: "DELETE",
+
+            credentials: "include",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
